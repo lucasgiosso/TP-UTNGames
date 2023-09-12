@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "SaleDeJuegos": {
+    "SalaDeJuegos": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/sale-de-juegos",
+            "outputPath": "dist/sala-de-juegos",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "SaleDeJuegos:build:production"
+              "browserTarget": "SalaDeJuegos:build:production"
             },
             "development": {
-              "browserTarget": "SaleDeJuegos:build:development"
+              "browserTarget": "SalaDeJuegos:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "SaleDeJuegos:build"
+            "browserTarget": "SalaDeJuegos:build"
           }
         },
         "test": {

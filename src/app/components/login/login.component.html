@@ -1,0 +1,24 @@
+<div class="login-container">
+    <h2>Login</h2>
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Username:</label>
+        <input type="text" id="email" formControlName="email" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <label for="clave">Password:</label>
+        <input type="password" id="password" formControlName="password" placeholder="Password">
+    </div>
+    <div class="forgot">
+    <p><a href="#">Forgot Password ?</a></p>
+    </div>
+      <button type="submit">Login</button>
+      <div class="register">
+        <p>Don`t you have an account<span class="icon icon--info">?</span>Register !</p>
+        <h1 (register)="onRegister()">Registro</h1>
+        </div>
+</form>
+<div class="error">
+    <p>{{ errorMensaje }}</p>
+</div>
+  </div>
