@@ -7,6 +7,20 @@
     background-color: #f5f5f5;
     text-align: center;
   }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    //margin: 0;
+    //background: #efecff;
+    //background-size: 16px 16px;
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/tp-sala-de-juegos-diazgiossol.appspot.com/o/background.svg?alt=media&token=dc633112-e417-4d83-85cd-769218c72573);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Euclid Circular A", "Poppins";
+  }
   
   .form-group {
     margin-bottom: 10px;
@@ -35,7 +49,8 @@
   }
   
   button {
-    background-color: #7E5AF1;
+    //background-color: #7E5AF1;
+    background: linear-gradient(90deg, #7167dd, #5448de);
     width: 98%;
     color: #fff;
     border: none;

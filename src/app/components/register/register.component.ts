@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
 import { UserService } from 'src/app/user.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -22,14 +23,24 @@ export class RegisterComponent {
 
   ngOnInit() : void{}
 
-  onSubmit() 
-  {
-    this.userService.register(this.formReg.value)
-    .then(response => {console.log(response);
-    this.router.navigate(['/home'])
-    })
-    .catch(error =>console.log(error));
-  }
+  onSubmit() {
+    const { email, password } = this.formReg.value;
+
+    if (email && password) {
+        this.userService.register(this.formReg.value)
+            .then(response => {
+                console.log(response);
+                this.router.navigate(['/home']);
+            })
+            .catch(error => console.log(error));
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Por favor, completa todos los campos.',
+        });
+    }
+}
 
   public onClick(event: any): void 
   {

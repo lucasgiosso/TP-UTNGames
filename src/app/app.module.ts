@@ -11,6 +11,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import { WordScrambleComponent } from './components/word-scramble/word-scramble.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     LoginComponent,
     HomeComponent,
     QuiensoyComponent,
-    RegisterComponent
+    RegisterComponent,
+    WordScrambleComponent
   ],
   imports: [
     BrowserModule,

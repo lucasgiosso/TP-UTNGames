@@ -1,1 +1,34 @@
-<p>home works!</p>
+<body>
+
+  <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': '' ">
+    <div class="logo-container">
+        <button class="logo"(click)="toggleCollapse()">UG</button>
+        <div class="logo-text" *ngIf="collapsed">UTN Games</div>
+        <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
+            <i class="fal fa-times close-icon"></i>
+        </button>
+    </div>
+
+    <ul class="sidenav-nav">
+        <li class="sidenav-nav-item" *ngFor="let data of navData">
+        <a class="sidenav-nav-link" [routerLink]="[data.routeLink]"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
+
+            <i class="sidenav-link-icon" [class]="data.icon"></i>
+            <span class="sidenav-link-text" *ngIf="collapsed">{{data.label}}</span>
+        </a>
+    </li>
+    </ul>
+
+    <div class="bottom-content">
+      <li class="">
+        <a href="#">
+          <i class='bx bx-log-out icon'></i>
+          <span class="text nav-text">Logout</span>
+        </a>
+      </li>
+    </div>
+
+  </div>
+</body>

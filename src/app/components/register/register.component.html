@@ -1,15 +1,18 @@
-<div class="login-container">
-    <h2>Register</h2>
-    <form [formGroup]="formReg" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="email">Username:</label>
-          <input type="text" id="email" formControlName="email" placeholder="Username">
+
+<body>
+    <div class="login-container">
+      <h2>Register</h2>
+      <form [formGroup]="formReg" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="email">Username:</label>
+            <input type="text" id="email" formControlName="email" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label for="clave">Password:</label>
+            <input type="password" id="password" formControlName="password" placeholder="Password">
         </div>
-        <div class="form-group">
-          <label for="clave">Password:</label>
-          <input type="password" id="password" formControlName="password" placeholder="Password">
-      </div>
-        <button type="submit">Register</button>
-        <input type="button" [value]="btnVolver" [class]="['botones-color']" (click)="onClick($event)"/>
-    </form>
-</div>
+          <button type="submit">Register</button>
+          <input type="button" [value]="btnVolver" [class]="['botones-color']" (click)="onClick($event)"/>
+      </form>
+  </div>
+</body>

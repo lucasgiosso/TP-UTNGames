@@ -1,0 +1,120 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    //margin: 0;
+    //background: #efecff;
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/tp-sala-de-juegos-diazgiossol.appspot.com/o/background.svg?alt=media&token=dc633112-e417-4d83-85cd-769218c72573);
+    background-repeat: no-repeat;
+    background-size: cover;
+    //background-size: 16px 16px;
+    font-family: "Euclid Circular A", "Poppins";
+  }
+
+.card{
+    display: flex;
+    align-items: center;
+    width: 75vw;
+    max-width: 650px;
+    padding: 50px 30px 50px 20px;
+    background: #ffffff;
+    border-radius: 48px;
+}
+
+.card img{
+    max-width: 280px;
+    width: 28vw;
+    height: 300px;
+    object-fit: cover;
+    margin-left: -60px;
+    margin-right: 30px;
+    border-radius: inherit;
+    box-shadow: 0 60px 40px rgb(0 0 0 / 8%);
+}
+
+.card h2 {
+    font-size: 22px;
+    margin-right: 30px;
+  }
+
+.card h3 {
+font-size: 16px;
+font-weight: 400;
+color: rgb(0 0 0 / 90%);
+}
+
+.card p {
+font-size: 14px;
+font-weight: 400;
+color: rgb(0 0 0 / 70%);
+margin-bottom: 24px;
+}
+
+.card button {
+    border:0;
+    background: linear-gradient(90deg, #5448de, #5448de);
+    color: #f8f8f8;
+    font-family: inherit;
+    padding: 16px 26px;
+    font-size: 16px;
+    border-radius: 40px;
+    //margin: 0 auto;
+}
+
+.button-container {
+    border: 0;
+    //background: linear-gradient(90deg, #7167dd, #5448de);
+    //background: linear-gradient(90deg, #9cdd67, #5448de);
+    background-color: #313131ef;
+    color: #f8f8f8;
+    font-family: inherit;
+    padding: 16px 26px;
+    font-size: 16px;
+    border-radius: 40px;
+    font-family: "Euclid Circular A", "Poppins";
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+@media (width <= 740px){
+    .card {
+        margin: 0 40px;
+        padding-left: 50px;
+        padding-right: 50px;
+        width: 100%;
+        text-align: center;
+        flex-direction: column;
+      }
+    
+    .card h2 {
+        margin-right: 0;
+        font-size: 26px;
+    }
+
+    .card img{
+        margin: -100px 0 30px 0;
+        width: 100%;
+        max-width: 1000px;
+    }
+}
+
