@@ -17,9 +17,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/sala-de-juegos",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "lodash"],
             "polyfills": [
               "zone.js"
             ],

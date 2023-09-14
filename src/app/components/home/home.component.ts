@@ -1,10 +1,3 @@
-
-// interface NavData {
-//   routeLink: string;
-//   icon: string;
-//   label: string;
-// }
-
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { navbarData } from './home-data';
 import { UserService } from 'src/app/user.service';
@@ -45,7 +38,6 @@ export class HomeComponent implements OnInit{
 
     ngOnInit(): void {
       this.screenWidth = window.innerWidth;
-      this.currentUser = this.currentUser.getUserData();
     }
 
     toggleCollapse(): void{

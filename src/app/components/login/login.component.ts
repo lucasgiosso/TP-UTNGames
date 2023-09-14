@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import { User } from 'firebase/auth';
 
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
