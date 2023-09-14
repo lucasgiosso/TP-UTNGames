@@ -27,10 +27,18 @@ export class RegisterComponent {
     const { email, password } = this.formReg.value;
 
     if (email && password) {
+
         this.userService.register(this.formReg.value)
             .then(response => {
                 console.log(response);
-                this.router.navigate(['/home']);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registro exitoso',
+                    text: '¡Bienvenido!',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    this.router.navigate(['/home']);
+                });
             })
             .catch(error => console.log(error));
     } else {

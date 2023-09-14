@@ -3,7 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/user.service';
 import Swal from 'sweetalert2';
-// import 'animate.css';
+
+
 
 @Component({
   selector: 'app-login',
