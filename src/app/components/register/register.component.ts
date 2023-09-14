@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
 import { UserService } from 'src/app/user.service';
 import { Router } from '@angular/router';
+// import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -17,6 +18,7 @@ export class RegisterComponent {
   constructor(
     private userService: UserService,
     private router: Router)
+    // private route: ActivatedRoute)
   {
     this.formReg = new FormGroup({email: new FormControl(), password: new FormControl()})
   }
@@ -49,7 +51,6 @@ export class RegisterComponent {
         });
     }
 }
-
   public onClick(event: any): void 
   {
     this.router.navigate(['/login']);

@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/user.service';
 import Swal from 'sweetalert2';
+import { User } from 'firebase/auth';
 
 
 
@@ -15,6 +16,7 @@ export class LoginComponent {
 
   formLogin: FormGroup;
   errorMensaje: string = '';
+  currentUser: User | null = null;
 
   constructor(private userService: UserService,
     private router: Router) 
@@ -22,7 +24,9 @@ export class LoginComponent {
     this.formLogin = new FormGroup({email: new FormControl(), password: new FormControl()})
   }
 
-  ngOnInit(): void{}
+  ngOnInit(): void{
+    this.currentUser = this.userService.getCurrentUser();
+  }
 
   onRegister() 
   {
@@ -54,6 +58,8 @@ export class LoginComponent {
       this.userService.login(this.formLogin.value)
         .then(response => {
           console.log(response);
+
+          this.currentUser = this.userService.getCurrentUser();
 
           Swal.fire({
               icon: 'success',

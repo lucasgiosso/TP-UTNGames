@@ -27,5 +27,11 @@ export const navbarData = [
         routeLink: 'preguntados',
         icon: 'fa solid fa-question',
         label: 'Preguntados'
+    },
+
+    {
+        routeLink: 'logout',
+        icon: 'fa solid fa-power-off',
+        label: 'Logout'
     }
 ]

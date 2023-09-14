@@ -7,28 +7,23 @@
         <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
             <i class="fal fa-times close-icon"></i>
         </button>
-    </div>
+  </div>
 
     <ul class="sidenav-nav">
-        <li class="sidenav-nav-item" *ngFor="let data of navData">
+      <li class="sidenav-nav-item" *ngFor="let data of navData">
         <a class="sidenav-nav-link" [routerLink]="[data.routeLink]"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">
-
-            <i class="sidenav-link-icon" [class]="data.icon"></i>
-            <span class="sidenav-link-text" *ngIf="collapsed">{{data.label}}</span>
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }" 
+          (click)="handleNavigation(data.routeLink)">
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
+          <span class="sidenav-link-text" *ngIf="collapsed">{{ data.label }}</span>
         </a>
-    </li>
     </ul>
-
-    <div class="bottom-content">
-      <li class="">
-        <a href="#">
-          <i class='bx bx-log-out icon'></i>
-          <span class="text nav-text">Logout</span>
-        </a>
-      </li>
+      
+      <div class="info" *ngIf="currentUser">
+        <p>{{ currentUser.username }}</p>
+      </div>
     </div>
 
-  </div>
+
 </body>

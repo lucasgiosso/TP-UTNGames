@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, User } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  private userData: any = {};
 
   constructor(private auth: Auth) { }
 
@@ -27,4 +29,8 @@ export class UserService {
   {
     return signOut(this.auth);
   }  
+
+  getCurrentUser(): User | null {
+    return this.auth.currentUser;
+  }
 }

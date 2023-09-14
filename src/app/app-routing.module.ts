@@ -19,7 +19,8 @@ const routes: Routes = [
   // },
   {path: 'home', component:HomeComponent},
   {path: 'home/quiensoy', component:QuiensoyComponent},
-  {path: 'home/word-scramble', component:WordScrambleComponent}
+  {path: 'home/word-scramble', component:WordScrambleComponent},
+  {path: 'home/logout', component: LoginComponent }
 ];
 
 @NgModule({
