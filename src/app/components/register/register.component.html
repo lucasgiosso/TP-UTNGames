@@ -1,18 +1,30 @@
 
 <body>
     <div class="login-container">
-      <h2>Register</h2>
+      
+      <div class="form-group">
+      <h2>Registro</h2>
+      </div>
+      
       <form [formGroup]="formReg" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="email">Username:</label>
-            <input type="text" id="email" formControlName="email" placeholder="Username">
+            <label for="email">Nombre de usuario:</label>
+            <input type="text" id="email" formControlName="email" placeholder="Email">
           </div>
+          
           <div class="form-group">
-            <label for="clave">Password:</label>
-            <input type="password" id="password" formControlName="password" placeholder="Password">
-        </div>
-          <button type="submit">Register</button>
+            <label for="clave">Contraseña:</label>
+            <input type="password" id="password" formControlName="password" placeholder="Contraseña">
+          </div>  
+
+          <div class="form-group">
+            <label for="clave">Repetir Contraseña:</label>
+            <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Repetir Contraseña">
+          </div>
+
+          <button type="submit" [disabled]="formReg.invalid">Registrar</button>
           <input type="button" [value]="btnVolver" [class]="['botones-color']" (click)="onClick($event)"/>
-      </form>
+      
+        </form>
   </div>
 </body>

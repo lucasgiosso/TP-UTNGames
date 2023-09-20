@@ -32,6 +32,6 @@ export const navbarData = [
     {
         routeLink: 'logout',
         icon: 'fa solid fa-power-off',
-        label: 'Logout'
+        label: 'Cerrar sesión'
     }
 ]

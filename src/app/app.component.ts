@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import firebase from 'firebase/compat/app';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -13,6 +14,20 @@ interface SideNavToggle {
 })
 export class AppComponent {
   title = 'SalaDeJuegos';
+
+  constructor(){
+
+  }
+
+  ngOnInit(): void {
+
+    firebase.initializeApp({
+      
+      apiKey: "AIzaSyBZOj2JN99O-Pz74t-0MJ1OXhb4PeopHMI",
+
+      authDomain: "tp-sala-de-juegos-diazgiossol.firebaseapp.com",}
+    )
+  }
 
   isSideNavCollapsed = false;
   screenWidth = 0;

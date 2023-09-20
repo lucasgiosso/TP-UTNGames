@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+// import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -28,6 +29,8 @@ import { WordScrambleComponent } from './components/word-scramble/word-scramble.
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    //AngularFireAuthModule,
+    //AngularFireModule.initializeApp(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth())
   ],
