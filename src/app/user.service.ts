@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserCredential } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, User, fetchSignInMethodsForEmail } from '@angular/fire/auth';
-import { addDoc,getFirestore, Firestore, collection, doc, setDoc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
-import { formatDate } from '@angular/common';
+import { DataServices } from './data.services';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ export class UserService {
 
   private userData: any = {};
 
-  constructor(private auth: Auth) { 
+  constructor(private auth: Auth, private dataService:DataServices) { 
     
   }
 
@@ -20,6 +19,10 @@ export class UserService {
   // {
   //   return createUserWithEmailAndPassword(this.auth, email, password);
   // }
+
+  obtenerUser(){
+    return this.dataService.cargarLogin()
+  }
 
   async register(email: string, password: string) 
   {
@@ -36,40 +39,14 @@ export class UserService {
       });
   }
 
-  // login({email, password}: any) 
-  // {
-  //   return signInWithEmailAndPassword(this.auth, email, password);
-  // }  
-
-  async registerUserLogin(user: UserCredential): Promise<void> {
-    
-    if (user.user) {
-
-      const userId = user.user.uid;
-      const loginDate = new Date().toISOString();
-      const firestore = getFirestore(); 
-      const userLoginsRef = collection(firestore, 'userLogins');
-      const userLoginDocRef = doc(userLoginsRef, userId);
-
-      setDoc(userLoginDocRef, {
-        userId,
-        loginDate
-      })
-
-      // const userId = user.user.uid;
-      // const loginDate = new Date().toISOString();
-
-      // await this.firestore.collection('userLogins').doc(userId).set({
-      //   loginDate
-      // });
-    }
-  }
-
   login({ email, password }: any) {
     return signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential: UserCredential) => {
-
-        this.registerUserLogin(userCredential);
+        const user = userCredential.user;
+        if (user) {
+          const {email } = user;
+          this.dataService.guardarLogin(email);
+        }
         return userCredential;
       });
   }
@@ -122,6 +99,4 @@ export class UserService {
       };
     });
   }
-
-  
 }

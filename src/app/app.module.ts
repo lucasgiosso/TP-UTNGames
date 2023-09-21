@@ -11,8 +11,8 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { WordScrambleComponent } from './components/word-scramble/word-scramble.component';
-import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-
+import { DataServices } from './data.services';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,17 +21,18 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     HomeComponent,
     QuiensoyComponent,
     RegisterComponent,
-    WordScrambleComponent
+    WordScrambleComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth())
   ],
-  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase}],
+  providers: [DataServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
