@@ -1,29 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UserCredential } from '@angular/fire/auth';
-import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, User, fetchSignInMethodsForEmail } from '@angular/fire/auth';
-
-
-interface MyDocumentSnapshotExists extends firebase.firestore.DocumentSnapshot {
-
-}
-
-interface MyQueryDocumentSnapshot extends firebase.firestore.QueryDocumentSnapshot {
-
-}
-
-interface MyQuerySnapshot extends firebase.firestore.QuerySnapshot {
-
-}
-
-interface MyDocumentChange extends firebase.firestore.DocumentChange {
-
-}
-
+import { addDoc,getFirestore, Firestore, collection, doc, setDoc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
+import { formatDate } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -32,24 +12,20 @@ export class UserService {
 
   private userData: any = {};
 
-  constructor(private auth: Auth,  private db: AngularFireDatabase, private firestore: AngularFirestore) { }
-
-  register({email, password}: any) 
-  {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+  constructor(private auth: Auth) { 
+    
   }
 
-  // async register(email: string, password: string) 
+  // register({email, password}: any) 
   // {
-  //   try {
-          
-  //     return await this.afAuth.createUserWithEmailAndPassword(email, password);
-      
-  //   } catch (error) {
-  //     console.log("Error en registro ", error);
-  //     return null;
-  //   }
-  // }  
+  //   return createUserWithEmailAndPassword(this.auth, email, password);
+  // }
+
+  async register(email: string, password: string) 
+  {
+    const user = await createUserWithEmailAndPassword(this.auth,email, password);
+    return await signInWithEmailAndPassword(this.auth,email, password);
+  }
 
   checkIfUserExists(email: string) {
     return fetchSignInMethodsForEmail(this.auth, email)
@@ -65,14 +41,47 @@ export class UserService {
   //   return signInWithEmailAndPassword(this.auth, email, password);
   // }  
 
+  async registerUserLogin(user: UserCredential): Promise<void> {
+    
+    if (user.user) {
+
+      const userId = user.user.uid;
+      const loginDate = new Date().toISOString();
+      const firestore = getFirestore(); 
+      const userLoginsRef = collection(firestore, 'userLogins');
+      const userLoginDocRef = doc(userLoginsRef, userId);
+
+      setDoc(userLoginDocRef, {
+        userId,
+        loginDate
+      })
+
+      // const userId = user.user.uid;
+      // const loginDate = new Date().toISOString();
+
+      // await this.firestore.collection('userLogins').doc(userId).set({
+      //   loginDate
+      // });
+    }
+  }
+
   login({ email, password }: any) {
     return signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential: UserCredential) => {
-        // Iniciar sesión exitosa, registrar el log del usuario
+
         this.registerUserLogin(userCredential);
         return userCredential;
       });
   }
+
+  // login(email: string, password: string) {
+  //   return signInWithEmailAndPassword(this.auth, email, password)
+  //     .then((userCredential: UserCredential) => {
+
+  //       this.registerUserLogin(userCredential);
+  //       return userCredential;
+  //     });
+  // }
   
   // async login(email: string, password: string) 
   // {
@@ -114,14 +123,5 @@ export class UserService {
     });
   }
 
-  async registerUserLogin(user: UserCredential): Promise<void> {
-    if (user.user) {
-      const userId = user.user.uid;
-      const loginDate = new Date().toISOString();
-
-      await this.firestore.collection('userLogins').doc(userId).set({
-        loginDate
-      });
-    }
-  }
+  
 }

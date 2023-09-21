@@ -5,12 +5,17 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { QuiensoyComponent } from './components/quiensoy/quiensoy.component';
 import { WordScrambleComponent } from './components/word-scramble/word-scramble.component';
-import {canActivate, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
-import { AuthGuard } from '@angular/fire/auth-guard';
+//import {canActivate, redirectUnauthorizedTo,AuthGuard} from '@angular/fire/auth-guard';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
+//const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
 
 const routes: Routes = [
+
+  // { path: 'home',
+  //   canActivate: [AuthGuard],
+  //   data: { authGuardPipe: redirectUnauthorizedToLogin },
+  //   loadChildren: () => import('./components/home/home.component').then(m=> m.HomeComponent)
+  // },
   {path: '', pathMatch: 'full', redirectTo: 'login'},
   {path: 'register', component:RegisterComponent},
   {path: 'login', component:LoginComponent},

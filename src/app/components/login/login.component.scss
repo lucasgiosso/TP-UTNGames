@@ -15,9 +15,6 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    //margin: 0;
-    //background: #efecff;
-    //background-size: 16px 16px;
     background-image: url(https://firebasestorage.googleapis.com/v0/b/tp-sala-de-juegos-diazgiossol.appspot.com/o/background.svg?alt=media&token=dc633112-e417-4d83-85cd-769218c72573);
     background-repeat: no-repeat;
     background-size: cover;
@@ -51,7 +48,6 @@
   }
   
   button {
-    //background-color: #7E5AF1;
     background: linear-gradient(90deg, #7167dd, #5448de);
     width: 98%;
     color: #fff;
@@ -76,36 +72,32 @@
     
 }
 
-  a {
-    color: inherit;
-    color: var(--anchorColor);
-    text-decoration: none;
-    -webkit-transition: color 0.5s;
-    -o-transition: color 0.5s;
-    transition: color 0.5s;
-  }
-  
-  a:hover {
-    color: #c696fd;
-  }
+a {
+  color: inherit;
+  color: var(--anchorColor);
+  text-decoration: none;
+  -webkit-transition: color 0.5s;
+  -o-transition: color 0.5s;
+  transition: color 0.5s;
+}
+
+a:hover {
+  color: #c696fd;
+}
 
 .icon {
-    height: 1.25em;
-    display: inline-table;
-    width: 1.25em;
-    //line-height: 1.25em;
-    //margin-right: 0.625em;
-    text-align: center;
-    //vertical-align: middle;
-  }
+  height: 1.25em;
+  display: inline-table;
+  width: 1.25em;
+  text-align: center;
+}
   
-  .icon--info {
-    //background-color: #e5e5e5;
-    border-radius: 50%;
-  }
+.icon--info {
+  border-radius: 50%;
+}
   
-  .error
-  {
-    color: #ec1414;
-    text-align: center;
-  }
+.error
+{
+  color: #ec1414;
+  text-align: center;
+}

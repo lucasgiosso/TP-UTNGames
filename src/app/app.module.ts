@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-// import { AngularFireModule } from '@angular/fire/compat';
-// import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -13,6 +11,7 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { WordScrambleComponent } from './components/word-scramble/word-scramble.component';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 
 @NgModule({
@@ -29,12 +28,11 @@ import { WordScrambleComponent } from './components/word-scramble/word-scramble.
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    //AngularFireAuthModule,
-    //AngularFireModule.initializeApp(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth())
   ],
-  providers: [],
+  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}

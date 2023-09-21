@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { UserService } from 'src/app/user.service';
 import { Router } from '@angular/router';
-// import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,78 +9,114 @@ import Swal from 'sweetalert2';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit{
 
   formReg: FormGroup;
+  hidePassword: boolean = true;
+  // form = this.formReg.group({
+  //   email: ['', [Validators.email, Validators.required]],
+  //   password: ['', [Validators.required]],
+  //   confirmpassword: ['', [Validators.required]],
+  // });
+  
   public btnVolver = 'Volver a iniciar sesión';
 
   constructor(
     private userService: UserService,
     private router: Router)
-    // private route: ActivatedRoute)
   {
     this.formReg = new FormGroup({email: new FormControl(), password: new FormControl(), confirmPassword: new FormControl()})
   }
 
-  ngOnInit() : void{
+  ngOnInit() : void{}
 
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 
-  onSubmit() {
-
+  async onSubmit() {
+    
     if (this.formReg.invalid) {
-      
       return;
     }
 
     const passwordControl = this.formReg.get('password');
     const confirmPasswordControl = this.formReg.get('confirmPassword');
     const { email, password, confirmPassword } = this.formReg.value;
-    
-    if (email && password && confirmPassword) {
-
-      if (password !== confirmPassword) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error en la contraseña',
-          text: 'Las contraseñas no coinciden. Por favor, verifica.',
-        })
-      }
   
-      this.userService.checkIfUserExists(email).then((userExists) => {
-        if (userExists) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Usuario existente',
-            text: 'El correo electrónico ya está registrado. Inicia sesión en lugar de registrarte.',
-          }).then(() => {
-            if (passwordControl && confirmPasswordControl) {
-              passwordControl.reset();
-              confirmPasswordControl.reset();
-            }
-          });
-        } else {
-          this.userService.register(this.formReg.value)
-            .then(response => {
-              console.log(response);
-              Swal.fire({
-                icon: 'success',
-                title: 'Registro exitoso',
-                text: '¡Bienvenido!',
-                confirmButtonText: 'OK'
-              }).then(() => {
-                this.router.navigate(['/home']);
-              });
-            })
-            .catch(error => console.log(error));
-        }
-      });
-    } else {
+    if (password !== confirmPassword) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'Por favor, completa todos los campos.',
+        title: 'Error en la contraseña',
+        text: 'Las contraseñas no coinciden. Por favor, verifica.',
+      }).then(() => {
+        if (passwordControl && confirmPasswordControl) {
+          passwordControl.reset();
+          confirmPasswordControl.reset();
+        }
       });
+      return;
+    }
+  
+    try {
+      const userExists = await this.userService.checkIfUserExists(email);
+  
+      if (userExists) {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Usuario existente',
+                  text: 'El correo electrónico ya está registrado. Inicia sesión en lugar de registrarte.',
+                }).then(() => {
+                  if (passwordControl && confirmPasswordControl) {
+                    passwordControl.reset();
+                    confirmPasswordControl.reset();
+                  }
+                });
+      } else {
+
+        const userCredential = await this.userService.register(email, password);
+  
+        Swal.fire({
+          icon: 'success',
+          title: 'Registro exitoso',
+          text: '¡Bienvenido!',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          this.router.navigate(['/home']);
+        });
+      }
+    } catch (error: any) {
+
+      if (error.code === 'auth/invalid-email') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error en el correo electrónico',
+          text: 'El formato del correo electrónico es incorrecto. Por favor, verifica.',
+        });
+      } else if (error.code === 'auth/weak-password') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Contraseña débil',
+          text: 'La contraseña es demasiado débil. Debe contener al menos 6 caracteres.',
+        }).then(() => {
+          if (passwordControl && confirmPasswordControl) {
+            passwordControl.reset();
+            confirmPasswordControl.reset();
+          }
+        });
+      } else {
+        console.error('Error en el registro:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error en el registro',
+          text: 'Hubo un error al registrar tu cuenta. Por favor, verifica tus datos.',
+        }).then(() => {
+          if (passwordControl && confirmPasswordControl) {
+            passwordControl.reset();
+            confirmPasswordControl.reset();
+          }
+        });
+      }
     }
   }
 

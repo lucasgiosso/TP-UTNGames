@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import firebase from 'firebase/compat/app';
-
+import 'firebase/compat/auth';
+import { environment } from 'src/environments/environment';
 interface SideNavToggle {
   screenWidth: number;
   collapsed: boolean;
@@ -28,6 +29,14 @@ export class AppComponent {
       authDomain: "tp-sala-de-juegos-diazgiossol.firebaseapp.com",}
     )
   }
+
+  // ngOnInit(): void {
+  //   firebase.initializeApp({
+  //     apiKey: environment.firebase.apiKey,
+  //     authDomain: environment.firebase.authDomain,
+
+  //   });
+  // }
 
   isSideNavCollapsed = false;
   screenWidth = 0;

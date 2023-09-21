@@ -55,8 +55,6 @@ export class HomeComponent implements OnInit{
       }
     }
 
-
-
     ngOnInit(): void {
       this.screenWidth = window.innerWidth;
     }
@@ -95,6 +93,7 @@ export class HomeComponent implements OnInit{
       }).then(async (result) => {
         if (result.isConfirmed) {
           try {
+            console.log('Route link clicked: logout');
             await this.auth.signOut();
             this.router.navigate(['/login']);
           } catch (error) {
@@ -105,26 +104,6 @@ export class HomeComponent implements OnInit{
         }
       });
     }
-    // logout() {
-    //   Swal.fire({
-    //     title: '¿Estás seguro?',
-    //     text: 'Lamentamos que quieras salir...',
-    //     icon: 'warning',
-    //     showCancelButton: true,
-    //     confirmButtonColor: '#3085d6',
-    //     cancelButtonColor: '#d33',
-    //     confirmButtonText: 'Sí, salir'
-    //   }).then((result) => {
-    //     if (result.isConfirmed) {
-    //       signOut(this.auth).then(() => {
-    //         this.router.navigate(['/login']);
-    //       });
-    //     } 
-    //     else{
-    //       this.router.navigate(['/home']);
-    //     }
-    //   });
-    // }
 
     userLogged() {
       this.userService.getCurrentUser().subscribe(
