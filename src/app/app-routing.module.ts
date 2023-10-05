@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './modules/general/login/login.component';
 import { PageNotFoundComponent } from './modules/general/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
 
-  // { path: '', component: HomeComponent, },
+  { path: '', component: LoginComponent, },
   {
     path: 'home',
     loadChildren: () => import('./modules/general/home/home.module')

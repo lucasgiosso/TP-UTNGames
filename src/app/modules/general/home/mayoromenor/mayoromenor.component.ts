@@ -16,6 +16,7 @@ export class MayoromenorComponent implements OnInit {
   public btnVolver = 'Volver a Home';
   currentCard: number = 0;
   nextCard: number = 0;
+  lastCard: number | null = null;
   currentUser$: Observable<User | null>;
   resultMessageText: string = ''; 
   score: number = 0;
@@ -40,7 +41,13 @@ export class MayoromenorComponent implements OnInit {
   }
 
   getRandomCard(): number {
-    return Math.floor(Math.random() * 10) + 1;
+    let card: number;
+    do {
+      card = Math.floor(Math.random() * 10) + 1;
+    } while (card === this.lastCard);
+  
+    this.lastCard = card; 
+    return card;
   }
 
   makeGuess(guess: 'mayor' | 'menor') {
