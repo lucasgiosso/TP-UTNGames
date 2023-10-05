@@ -24,6 +24,11 @@ export class UserService {
     return this.dataService.cargarLogin()
   }
 
+  isAuthenticated(): boolean {
+    const user = this.auth.currentUser;
+    return !!user; 
+  }
+
   async register(email: string, password: string) 
   {
     const user = await createUserWithEmailAndPassword(this.auth,email, password);

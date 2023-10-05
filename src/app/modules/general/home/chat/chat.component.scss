@@ -1,0 +1,108 @@
+.cardContainer{
+    width: 300px;
+    height: 500px;
+    position: fixed;
+    right: 0.5rem;
+    bottom: 0.5rem;
+}
+
+.card-header{
+    background-color: blueviolet;
+    color: white;
+    font-weight: 600;
+}
+
+.card-body{
+    padding: 0.5rem;
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/tp-sala-de-juegos-diazgiossol.appspot.com/o/fondo%20chat.jpg?alt=media&token=c0818dad-9d5e-46c1-9c3f-e56a098049ea);
+}
+
+.icon{
+    cursor: pointer;
+}
+
+.icon:active{
+    transform: scale(0.9);
+    
+}
+
+
+.contenedorMensajes{
+    max-height: 375px;
+    padding: 0.3rem;
+    overflow-y: auto;
+}
+
+.contenedorMensajes::-webkit-scrollbar{
+    display: none;
+}
+
+.chatIconContainer{
+    position: fixed;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    background-color: rgb(167,167,167);
+    border-radius: 100%;
+
+}
+
+.chatIcon{
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+}
+
+.closeIcon{
+    position: absolute;
+    right: 0.5rem;
+    top: 0rem;
+    cursor: pointer;
+}
+
+.hora{
+    font-size: 10px;
+}
+
+.nombre-usuario {
+    font-size: 12px; 
+    color: #98f772;
+    margin-right: 8px;
+  }
+
+  .msj {
+    border: 1px solid #ccc;
+    background-color: #f0f0f0; 
+    padding: 10px; 
+    border-radius: 10px; 
+    margin: 5px 0; 
+    display: inline-block; 
+    max-width: 70%;
+  }
+
+.enviado{
+    display: block;
+    float: right;
+    background-color: #007bff; 
+    color: #fff; 
+    min-width: 50.01%;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 15px;
+}
+
+.recibido{
+    display: block;
+    float: left;
+    background-color: #e5e5ea; 
+    //color: white;
+    min-width: 50.01%;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 15px;
+}
