@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class MayoromenorComponent implements OnInit {
   
+  title = "";
   public btnVolver = 'Volver a Home';
   currentCard: number = 0;
   nextCard: number = 0;
@@ -32,6 +33,7 @@ export class MayoromenorComponent implements OnInit {
     }
 
   startGame() {
+    this.title = "Juego del Mayor o Menor";
     this.currentCard = this.getRandomCard();
     this.nextCard = this.getRandomCard();
     this.resultMessageText = '';
