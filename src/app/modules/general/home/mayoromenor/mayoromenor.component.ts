@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./mayoromenor.component.scss']
 })
 export class MayoromenorComponent implements OnInit {
+  
   public btnVolver = 'Volver a Home';
   currentCard: number = 0;
   nextCard: number = 0;
@@ -24,11 +25,11 @@ export class MayoromenorComponent implements OnInit {
   constructor(
     private userService: UserService, private auth: Auth,
     private router: Router) {this.currentUser$ = this.userService.getCurrentUser();}
-
-  ngOnInit() {
-    this.currentUser$ = this.userService.getCurrentUser();
-    this.startGame();
-  }
+    
+    ngOnInit() {
+      this.currentUser$ = this.userService.getCurrentUser();
+      this.startGame();
+    }
 
   startGame() {
     this.currentCard = this.getRandomCard();

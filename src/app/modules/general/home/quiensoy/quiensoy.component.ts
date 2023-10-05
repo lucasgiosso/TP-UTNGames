@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './quiensoy.component.html',
   styleUrls: ['./quiensoy.component.scss']
 })
-export class QuiensoyComponent {
+export class QuiensoyComponent implements OnInit{
 
   public btnVolver = 'Volver a Home';
   currentUser$: Observable<User | null>;
@@ -29,7 +29,7 @@ export class QuiensoyComponent {
     public onClick(event: any): void 
   {
     this.router.navigate(['/home']);
-    //console.log(event);
+    
   }
 
   toggleDropdown() {

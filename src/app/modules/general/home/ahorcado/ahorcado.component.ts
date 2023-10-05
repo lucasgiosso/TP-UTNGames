@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-
 @Component({
   selector: 'app-ahorcado',
   templateUrl: './ahorcado.component.html',
@@ -31,17 +30,18 @@ export class AhorcadoComponent implements OnInit{
     "l","m","n","o","p","q","r","s","t","u","v",
     "w","x","y","z"
   ];
-
-  ngOnInit() {
-    this.currentUser$ = this.userService.getCurrentUser();
-    this.iniciarNuevoJuego();
-  }
   
   constructor(private router: Router, 
     private userService: UserService, private auth: Auth,) {
     
       this.currentUser$ = this.userService.getCurrentUser();
   }
+  
+  ngOnInit() {
+    this.currentUser$ = this.userService.getCurrentUser();
+    this.iniciarNuevoJuego();
+  }
+  
 
   public onClick(event: any): void 
   {
