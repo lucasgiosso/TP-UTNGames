@@ -3,7 +3,6 @@
   <i class="fa solid fa-comment-dots chatIcon"></i>
 </div>
 
-
 <div class="card text-center cardContainer" *ngIf="usuarioLogueado && mostrarChat">
 
     <div class="card-header"(click)="mostrarChat=false">
@@ -24,12 +23,12 @@
       </div>
     </div>
 
-    <form class="card-footer text-muted input-group" (ngSubmit)="enviarMensaje()">
-          <input type="text" class="form-control" placeholder="Ingrese su mensaje" [(ngModel)]="nuevoMensaje" [ngModelOptions]="{standalone: true}">
-          <div class="input-group-append" (click)="enviarMensaje()">
-            <span class="input-group-text" id="basic-addon2">
-              <i class="fa regular fa-paper-plane icon"></i>
-            </span>
-          </div>
+    <form class="card-footer text-muted input-group" (ngSubmit)="enviarMensaje($event)">
+      <input type="text" class="form-control" placeholder="Ingrese su mensaje" [(ngModel)]="nuevoMensaje" [ngModelOptions]="{standalone: true}" (keydown.enter)="enviarMensaje($event)">
+      <div class="input-group-append" (click)="enviarMensaje($event)">
+        <span class="input-group-text" id="basic-addon2">
+          <i class="fa regular fa-paper-plane icon"></i>
+        </span>
+      </div>
     </form>
-  </div>
+
