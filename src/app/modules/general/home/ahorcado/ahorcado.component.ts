@@ -36,7 +36,7 @@ export class AhorcadoComponent implements OnInit{
     
       this.currentUser$ = this.userService.getCurrentUser();
   }
-  
+
   ngOnInit() {
     this.currentUser$ = this.userService.getCurrentUser();
     this.iniciarNuevoJuego();
@@ -203,7 +203,7 @@ export class AhorcadoComponent implements OnInit{
           console.error('Error al cerrar sesión:', error);
         }
       } else {
-        this.router.navigate(['/home/mayorOMenor']);
+        this.router.navigate(['/home/ahorcado']);
       }
     });
   }
