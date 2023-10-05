@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PageNotFoundComponent } from './modules/general/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -26,9 +27,7 @@ const routes: Routes = [
       .then(mod => mod.ChatModule)
   },
   {
-    path: '**',
-    redirectTo: 'login',
-    pathMatch: 'full'
+    path: '**', component: PageNotFoundComponent 
   }
 ]
 

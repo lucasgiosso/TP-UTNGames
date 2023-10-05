@@ -10,21 +10,54 @@ body {
     font-family: "Euclid Circular A", "Poppins";
   }
 
-
-
 .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    border-radius: .25rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #ffffff;
+  border: 1px solid #e1e1e1; 
+  border-radius: 8px; 
+
+
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+
+
+  margin: 10px;
+  padding: 20px;
+}
+
+.card .card-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e1e1e1; 
+  padding: 10px 0; 
+  font-weight: bold; 
+}
+
+.card .card-subtitle {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e1e1e1;
+  font-size: 18px; 
+  font-family: "Euclid Circular A", "Poppins";
+  margin-bottom: 10px; 
+}
+
+.button-container {
+  border: 0;
+  background-color: #5448de; 
+  color: #ffffff; 
+  font-family: "Euclid Circular A", "Poppins";
+  padding: 12px 24px; 
+  font-size: 16px;
+  border-radius: 4px; 
+  cursor: pointer;
+  text-align: center; 
+  transition: background-color 0.3s ease-in-out;
+
+
+  &:hover {
+    background-color: #4338cb;
   }
-  
-  .card .card-header {
-    background-color: #fff;
-    border-bottom: none;
-  }
+}
