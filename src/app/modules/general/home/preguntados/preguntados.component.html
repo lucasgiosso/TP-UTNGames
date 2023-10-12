@@ -1,39 +1,79 @@
 
-  <div class="row">
-    <div class="col text-center">
-      <h1 class="text-primary">{{ title }}</h1>
+
+
+<div class="navbar-custom">
+  <a (click)="toggleDropdown()" *ngIf="currentUser$ | async as user" >
+    <img *ngIf="user.photoURL" src="{{user.photoURL}}" alt="Foto de perfil de usuario" class="user-photo">
+    <img *ngIf="!user.photoURL" src="https://firebasestorage.googleapis.com/v0/b/tp-sala-de-juegos-diazgiossol.appspot.com/o/guest.webp?alt=media&token=69e91e4a-832d-4439-ab69-a30e2c8d80ee"  class="user-photo">
+    {{ user.displayName?user.displayName : user.email }} 
+  </a>
+  <div class="dropdown-content" *ngIf="isDropdownOpen">
+    <button class="logout-button" *ngIf="showLogoutButton" (click)="logout()">
+      <i class="fa solid fa-power-off"></i> Cerrar Sesión
+    </button>
+  </div>
+</div>
+  
+  <div class="roulette-container" *ngIf="showRoulette">
+    <div class="game-info text-center">
+      <h1>{{ title }}</h1>
+      <h3>{{ explicacion }}</h3>
     </div>
+    <div class="roulette">
+      <div class="wheel">
+        <div class="sector" *ngFor="let pregunta of preguntas; let i = index">
+          <div class="sector">
+            {{ i + 1 }}
+            <div class="bandera-img-container">
+              <img [src]="pregunta.flagUrl" [alt]="pregunta.pregunta" class="bandera-img" />
+            </div>
+          </div>
+        </div>
+        <div class="sector" *ngFor="let pais of paises"></div>
+        <div class="sector">1</div>
+        <div class="sector">2</div>
+        <div class="sector">3</div>
+        <div class="sector">4</div>
+        <div class="sector">5</div>
+        <div class="sector">6</div>
+        <div class="sector">7</div>
+        <div class="placeholder"></div>
+      </div>
+    </div>
+    <input type="button" [value]="btnVolver" [class]="['back-button']" (click)="onClick($event)" />
+  </div>
+
+<div class="spin-button-container" *ngIf="showRoulette">
+<button class="spin-button" (click)="spinRoulette()" *ngIf="showRoulette">
+  <span class="icon">▲</span> Girar 
+</button>
+</div>
+
+<div class="game-container" *ngIf="gameActive && isAnswered">
+  <div class="question-container">
+    <h2>Pregunta:</h2>
+    <p>{{ questionText }}</p>
+  </div>
+
+  <div class="answers-container">
+    <h2>Respuestas:</h2>
+    <ul>
+      <li *ngFor="let option of answerOptions">
+        <button (click)="checkAnswer(option)">{{ option }}</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="timer-container">
+    <h2>Temporizador</h2>
+    <p>{{ secondsLeft }} segundos</p>
+  </div>
+
+  <div class="score-container">
+    <h2>Puntuación:</h2>
+    <p>{{ score }}</p>
   </div>
   
-  <div class="row">
-    <div class="col text-center">
-      <img
-        src="assets/img/{{ intentos }}.png"
-        class="ahorcado-img"
-        alt="Perdiste!!! Estás Ahorcado!!!"
-        title="Perdiste!!! Estás Ahorcado!!!"
-      />
-      <h3>Intentos: <small>{{ intentos }} / 9 </small></h3>
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="col text-center">
-      <h1>{{ palabraOculta }}</h1>
-    </div>
-  </div>
-  
-  <div class="row" *ngIf="!gano && !perdio">
-    <div class="col text-center">
-      <div class="keyboard">
-        <button
-          (click)="comprobar(letra)"
-          *ngFor="let letra of letras"
-          class="btn btn-primary"
-        >
-          {{ letra.toUpperCase() }}
-        </button>
-    </div>
-    <input type="button" [value]="btnVolver" [class]="['button-container']" (click)="onClick($event)"/>
-    </div>
-  </div>
+  <input type="button" [value]="btnVolver" [class]="['back-button']" (click)="onClick($event)" />
+</div>
+

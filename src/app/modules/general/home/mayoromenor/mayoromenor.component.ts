@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class MayoromenorComponent implements OnInit {
   
   title = "";
-  public btnVolver = 'Volver a Home';
+  btnVolver = 'Volver a Home';
   currentCard: number = 0;
   nextCard: number = 0;
   lastCard: number | null = null;

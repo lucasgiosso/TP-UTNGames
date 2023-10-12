@@ -26,7 +26,6 @@
     
 }
 
-
 .contenedorMensajes{
     max-height: 375px;
     padding: 0.3rem;
@@ -71,8 +70,8 @@
 
 .nombre-usuario {
     font-size: 12px; 
-    color: #98f772;
-    margin-right: 25px;
+    color: #86ff90;
+    margin-right: 20px;
   }
 
   .msj {
@@ -88,7 +87,7 @@
 .enviado{
     display: block;
     float: right;
-    background-color: #007bff; 
+    background-color: #3140c9; 
     color: #fff; 
     min-width: 50.01%;
     border-radius: 10px;
@@ -99,10 +98,14 @@
 .recibido{
     display: block;
     float: left;
-    background-color: #007bff; 
-    //color: white;
+    background-color: #2599f8; 
+    color: white;
     min-width: 50.01%;
     border-radius: 10px;
     text-align: left;
     font-size: 15px;
+}
+
+.form-control{
+    font-size: 14px;
 }

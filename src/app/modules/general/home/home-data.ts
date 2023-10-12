@@ -23,17 +23,17 @@ export const navbarData = [
         label: 'Mayor o Menor'
     },
 
-    // {
-    //     routeLink: 'preguntados',
-    //     icon: 'fa solid fa-question',
-    //     label: 'Preguntados'
-    // },
+    {
+        routeLink: 'preguntados',
+        icon: 'fa solid fa-question',
+        label: 'Preguntados'
+    },
 
-    // {
-    //     routeLink: 'word-scramble',
-    //     icon: 'fa solid fa-spell-check',
-    //     label: 'Preguntados'
-    // },
+    {
+        routeLink: 'word-scramble',
+        icon: 'fa solid fa-spell-check',
+        label: 'Preguntados'
+    },
 
     {
         routeLink: 'logout',

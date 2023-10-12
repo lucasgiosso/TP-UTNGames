@@ -14,7 +14,7 @@ import { ChatRoutingModule } from './chat-routing.module';
       ReactiveFormsModule,
     ],
     exports: [
-   
+
     ],
     declarations: [
 

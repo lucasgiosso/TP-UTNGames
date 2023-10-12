@@ -98,7 +98,7 @@ export class AhorcadoComponent implements OnInit{
 
     this.palabraOculta = palabraOcultaArr.join(' ');
 
-    if (this.intentos === 9) {
+    if (this.intentos === 8) {
       this.perdio = true;
       this.mostrarMensajePerdedor();
     }

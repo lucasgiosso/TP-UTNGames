@@ -1,34 +1,32 @@
-
-<div *ngIf="usuarioLogueado && !mostrarChat" class="chatIconContainer" (click)="mostrarChat=true">
-  <i class="fa solid fa-comment-dots chatIcon"></i>
-</div>
-
-<div class="card text-center cardContainer" *ngIf="usuarioLogueado && mostrarChat">
-
-    <div class="card-header"(click)="mostrarChat=false">
-      CHAT
-      <div class="closeIcon" (click)="mostrarChat=false">X
-        
-      </div>
+    <div *ngIf="usuarioLogueado && !mostrarChat" class="chatIconContainer" (click)="mostrarChat=true">
+      <i class="fa solid fa-comment-dots chatIcon"></i>
     </div>
-
-    <div class="card-body">
-      <div id="contenedorMensajes" class="contenedorMensajes h-100">
-        <p *ngFor="let mensaje of mensajes" class="msj p-2"
-            [ngClass]="(usuarioLogueado.uid==mensaje.emisor) ? 'enviado' : 'recibido'"> 
+    
+    <div class="card text-center cardContainer" *ngIf="usuarioLogueado && mostrarChat">
+      <div class="card-header"(click)="mostrarChat=false">
+        CHAT
+        <div class="closeIcon" (click)="mostrarChat=false">X</div>
+      </div>
+    
+      <div class="card-body">
+        <div id="contenedorMensajes" #contenedorMensajes class="contenedorMensajes h-100">
+          <p *ngFor="let mensaje of mensajes" class="msj p-2"
+             [ngClass]="(usuarioLogueado.uid==mensaje.emisor) ? 'enviado' : 'recibido'"> 
             <span class="nombre-usuario">{{ mensaje.nombreUsuario }}</span>
-            {{mensaje.texto}}
+            {{ mensaje.texto }}
             <span class="hora">{{ mensaje.hora }}</span> 
-        </p>
+          </p>
+        </div>
       </div>
+    
+      <form class="card-footer text-muted input-group" (ngSubmit)="enviarMensaje()">
+        <input type="text" class="form-control" placeholder="Ingrese su mensaje" [(ngModel)]="nuevoMensaje" [ngModelOptions]="{standalone: true}" (keydown.enter)="enviarMensaje()">
+        <div class="input-group-append">
+
+          <button type="submit" class="btn btn-primary">
+            <i class="fa regular fa-paper-plane icon"></i> 
+          </button>
+        </div>
+      </form>
     </div>
-
-    <form class="card-footer text-muted input-group" (ngSubmit)="enviarMensaje($event)">
-      <input type="text" class="form-control" placeholder="Ingrese su mensaje" [(ngModel)]="nuevoMensaje" [ngModelOptions]="{standalone: true}" (keydown.enter)="enviarMensaje($event)">
-      <div class="input-group-append" (click)="enviarMensaje($event)">
-        <span class="input-group-text" id="basic-addon2">
-          <i class="fa regular fa-paper-plane icon"></i>
-        </span>
-      </div>
-    </form>
-
+    

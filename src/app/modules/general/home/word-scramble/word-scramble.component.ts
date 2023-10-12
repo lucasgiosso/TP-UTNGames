@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { user } from '@angular/fire/auth';
 import Swal from 'sweetalert2';
+import { Observable } from 'rxjs';
+import { Auth, User } from '@angular/fire/auth';
+import { UserService } from 'src/app/user.service';
+import { Router } from '@angular/router';
 
 interface Word {
   word: string;
@@ -22,6 +26,11 @@ export class WordScrambleComponent implements OnInit {
 
   correctWord = '';
   timer: any;
+  title = "";
+  btnVolver = 'Volver a Home';
+  currentUser$: Observable<User | null>;
+  isDropdownOpen = false;
+  showLogoutButton = false;
 
   words: Word[] = [
     {
@@ -29,7 +38,7 @@ export class WordScrambleComponent implements OnInit {
       hint: "El proceso de agregar numeros"
     },
     {
-      word: "meeting",
+      word: "encuentro",
       hint: "Evento en el que se reúnen personas"
     },
     {
@@ -38,6 +47,10 @@ export class WordScrambleComponent implements OnInit {
     }
   ];
 
+  constructor(
+    private userService: UserService, private auth: Auth,
+    private router: Router) {this.currentUser$ = this.userService.getCurrentUser();}
+
   ngOnInit(): void {
     this.wordText = document.querySelector(".word");
     this.hintText = document.querySelector(".hint span");
@@ -45,7 +58,7 @@ export class WordScrambleComponent implements OnInit {
     this.inputField = document.querySelector("input");
     this.refreshBtn = document.querySelector(".refresh-word");
     this.checkBtn = document.querySelector(".check-word");
-
+    this.currentUser$ = this.userService.getCurrentUser();
     this.refreshBtn?.addEventListener("click", () => {
       this.initGame();
     });
@@ -55,6 +68,12 @@ export class WordScrambleComponent implements OnInit {
     });
 
     this.initGame();
+  }
+
+  public onClick(event: any): void {
+    this.stopTimer();
+    this.router.navigate(['/home']);
+    //console.log(event);
   }
 
   initGame(): void {
@@ -75,7 +94,14 @@ export class WordScrambleComponent implements OnInit {
     }
   }
 
+  clearInputField(): void {
+    if (this.inputField) {
+      this.inputField.value = '';
+    }
+  }
+
   checkWord(): void {
+
     if (!this.inputField) {
       Swal.fire({
         icon: 'error',
@@ -90,9 +116,10 @@ export class WordScrambleComponent implements OnInit {
     {
       Swal.fire({
         icon: 'error',
-        title: 'Uh...',
-        text: `Uh! ${userWord} no es la palabra correcta.`,
+        title: 'Mmmm... no',
+        text: `${userWord} no es la palabra correcta.`,
       });
+      this.clearInputField();
     } 
     else {
       Swal.fire({
@@ -100,31 +127,13 @@ export class WordScrambleComponent implements OnInit {
         title: 'Felicitaciones!',
         text: `${this.correctWord.toUpperCase()} es la palabra correcta.`,
       });
-    this.initGame();
+      this.initGame();
   }
+
   }
   refreshGame(): void {
     this.initGame();
   }
-
-  // initTimer(maxTime: number): void {
-  //   clearInterval(this.timer);
-  //   this.timer = setInterval(() => {
-  //     if (maxTime > 0) {
-  //       maxTime--;
-  //       if (this.timeText) {
-  //         this.timeText.innerText = maxTime.toString();
-  //       }
-  //     } else {
-  //       Swal.fire({
-  //         icon: 'error',
-  //         title: 'Oops...',
-  //         text: `Time's up! ${this.correctWord.toUpperCase()} was the correct word.`,
-  //       });
-  //       this.initGame();
-  //     }
-  //   }, 1000);
-  // }
 
   async initTimer(maxTime: number): Promise<void> {
     clearInterval(this.timer);
@@ -140,7 +149,7 @@ export class WordScrambleComponent implements OnInit {
         timeUp = true;
         const swalResult = await Swal.fire({
           icon: 'error',
-          title: 'Uh...',
+          title: 'Uh...perdiste',
           text: `Tiempo finalizado! ${this.correctWord.toUpperCase()} era la palabra correcta.`,
           showCancelButton: false,
           confirmButtonText: 'OK',
@@ -151,6 +160,41 @@ export class WordScrambleComponent implements OnInit {
         }
       }
     }, 1000);
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+    this.showLogoutButton = this.isDropdownOpen; 
+  }
+
+
+  async logout() {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Lamentamos que quieras salir...',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, salir'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          console.log('Route link clicked: logout');
+          await this.auth.signOut();
+          this.stopTimer();
+          this.router.navigate(['/login']);
+        } catch (error) {
+          console.error('Error al cerrar sesión:', error);
+        }
+      } else {
+        this.router.navigate(['/home/word-scramble']);
+      }
+    });
+  }
+
+  stopTimer(): void {
+    clearInterval(this.timer);
   }
 
 }

@@ -6,6 +6,8 @@ import { MayoromenorComponent } from "./mayoromenor.component";
 import { MayoromenorRoutingModule } from './mayoromenor-routing.module';
 
 
+
+
 @NgModule({
     imports: [
       CommonModule,
@@ -14,7 +16,8 @@ import { MayoromenorRoutingModule } from './mayoromenor-routing.module';
       ReactiveFormsModule,
     ],
     declarations: [
-      MayoromenorComponent
+      MayoromenorComponent,
+
     ]
   })
 export class MayoromenorModule {}
